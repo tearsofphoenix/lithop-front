@@ -7,12 +7,6 @@ const LoggedOutView = props => {
       <ul className="nav navbar-nav pull-xs-right">
 
         <li className="nav-item">
-          <Link to="/" className="nav-link">
-            首页
-          </Link>
-        </li>
-
-        <li className="nav-item">
           <Link to="login" className="nav-link">
             登入
           </Link>
@@ -32,24 +26,21 @@ const LoggedOutView = props => {
 
 const LoggedInView = props => {
   if (props.currentUser) {
+    const showSearchInput = () => {
+
+    }
     return (
       <ul className="nav navbar-nav pull-xs-right">
-
         <li className="nav-item">
-          <Link to="/" className="nav-link">
-            首页
-          </Link>
+          <a className="nav-link lp-search-icon" onClick={showSearchInput}>
+            <i className="ion-search"></i>
+          </a>
+          <input className="lp-search-input" type="search" placeholder="Search Medium" required="true" />
         </li>
 
         <li className="nav-item">
           <Link to="editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;写新文章
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;设置
+            <i className="ion-compose"></i>&nbsp;新文章
           </Link>
         </li>
 

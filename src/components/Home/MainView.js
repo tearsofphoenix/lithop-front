@@ -16,7 +16,7 @@ const YourFeedTab = props => {
         <a  href=""
             className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
             onClick={clickHandler}>
-          Your Feed
+          我的
         </a>
       </li>
     );
@@ -35,7 +35,7 @@ const GlobalFeedTab = props => {
         href=""
         className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
         onClick={clickHandler}>
-        Global Feed
+        全部
       </a>
     </li>
   );
@@ -62,7 +62,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
+  onTabClick: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload }),
+  loadMore: (tab, pager, payload) => dispatch({ type: CHANGE_TAB, tab, pager, payload })
 });
 
 const MainView = props => {
@@ -88,7 +89,9 @@ const MainView = props => {
         articles={props.articles}
         loading={props.loading}
         articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+        currentPage={props.currentPage}
+        loadFunc={() => props.loadMore(props.tab, agent.Articles.all, agent.Articles.all())}
+      />
     </div>
   );
 };

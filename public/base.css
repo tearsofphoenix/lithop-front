@@ -5,3 +5,49 @@
 .lp-relative {
     position: relative !important;
 }
+
+.lp-search-icon {
+    display: inline-block !important;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 38px
+}
+
+.lp-search-input {
+    height: 38px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 140px;
+    line-height: 38px;
+    border: none;
+    transition: width .2s,padding .2s;
+    cursor: pointer;
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    box-shadow: none;
+    color: rgba(0, 0, 0, 0.8);
+    background: 0 0;
+    padding: 0 5px;
+    font-size: 14px;
+    outline: 0;
+}
+
+.footer-wrap {
+    border-top: 1px solid rgba(0,0,0,.05)!important;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    flex-wrap: wrap;
+    word-break: break-word;
+    word-wrap: break-word;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.footer-link {
+    font-size: 14px !important;
+    color: rgba(0,0,0,.44)!important;
+    fill: rgba(0,0,0,.44)!important;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 16px;
+}

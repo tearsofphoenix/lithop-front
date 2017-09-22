@@ -2,6 +2,7 @@ import Banner from './Banner';
 import MainView from './MainView';
 import React from 'react';
 import Tags from './Tags';
+import Footer from '../Footer';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import {
@@ -65,6 +66,7 @@ class Home extends React.Component {
           </div>
         </div>
 
+        <Footer />
       </div>
     );
   }

@@ -4,6 +4,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
+import Footer from '../Footer';
 import { ARTICLE_PAGE_LOADED, ARTICLE_PAGE_UNLOADED } from '../../constants/actionTypes';
 
 const mapStateToProps = state => ({
@@ -89,6 +90,8 @@ class Article extends React.Component {
               currentUser={this.props.currentUser} />
           </div>
         </div>
+
+        <Footer />
       </div>
     );
   }

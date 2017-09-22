@@ -1,6 +1,7 @@
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 import React from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const ArticleList = props => {
   if (!props.articles) {
@@ -18,14 +19,22 @@ const ArticleList = props => {
   }
 
   return (
-    <div className="lp-articles-wrapper">
-      {
-        props.articles.map(article => {
-          return (
-            <ArticlePreview article={article} key={article.slug} />
-          );
-        })
-      }
+    <div>
+      <InfiniteScroll
+          className="lp-articles-wrapper"
+          pageStart={0}
+          loadMore={props.loadFunc}
+          hasMore={props.loading}
+          loader={<div className="article-preview">Loading...</div>}
+      >
+        {
+          props.articles.map(article => {
+            return (
+                <ArticlePreview article={article} key={article.slug} />
+            );
+          })
+        }
+      </InfiniteScroll>
 
       <ListPagination
         pager={props.pager}
