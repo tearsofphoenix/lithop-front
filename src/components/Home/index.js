@@ -51,10 +51,10 @@ class Home extends React.Component {
           <div className="row">
             <MainView />
 
-            <div className="col-md-3">
+            <div className="col-md-2">
               <div className="sidebar">
 
-                <p>Popular Tags</p>
+                <p>热门标签</p>
 
                 <Tags
                   tags={this.props.tags}

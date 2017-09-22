@@ -1,0 +1,7 @@
+.lp-flex1 {
+    flex: 1 1 auto !important;
+}
+
+.lp-relative {
+    position: relative !important;
+}

@@ -18,7 +18,7 @@ const ArticleList = props => {
   }
 
   return (
-    <div>
+    <div className="lp-articles-wrapper">
       {
         props.articles.map(article => {
           return (
