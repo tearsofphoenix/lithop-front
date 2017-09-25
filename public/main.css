@@ -4079,7 +4079,7 @@ input[type="button"].btn-block {
 
 @media (min-width: 544px) {
     .navbar {
-        border-radius: 0.25rem;
+        /*border-radius: 0.25rem;*/
     }
 }
 
@@ -6956,7 +6956,6 @@ ul.tag-list li {
     font-size: 1.5rem !important;
     padding-top: 0rem !important;
     margin-right: 2rem !important;
-    color: #5CB85C !important;
 }
 
 .nav-link .user-pic {

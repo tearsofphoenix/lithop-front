@@ -27,9 +27,12 @@
     box-shadow: none;
     color: rgba(0, 0, 0, 0.8);
     background: 0 0;
-    padding: 0 5px;
     font-size: 14px;
     outline: 0;
+    color: white;
+    background: white;
+    border-radius: 4em;
+    padding: 0 5px 0 20px;
 }
 
 .footer-wrap {
@@ -50,4 +53,20 @@
     text-decoration: none;
     cursor: pointer;
     margin-right: 16px;
+}
+
+nav {
+    background: #5cb85c;
+}
+
+.white {
+    color: white !important;
+}
+
+.white .nav-link {
+    color: white !important;
+}
+
+.navbar-brand {
+    color: white !important;
 }

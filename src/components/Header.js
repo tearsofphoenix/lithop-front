@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className="nav navbar-nav pull-xs-right white">
 
         <li className="nav-item">
           <Link to="login" className="nav-link">
@@ -30,7 +30,7 @@ const LoggedInView = props => {
 
     }
     return (
-      <ul className="nav navbar-nav pull-xs-right">
+      <ul className="nav navbar-nav pull-xs-right white">
         <li className="nav-item">
           <a className="nav-link lp-search-icon" onClick={showSearchInput}>
             <i className="ion-search"></i>

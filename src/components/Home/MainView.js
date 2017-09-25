@@ -67,15 +67,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const MainView = props => {
+  console.log(70, props)
   return (
     <div className="col-md-10">
       <div className="feed-toggle">
         <ul className="nav nav-pills outline-active">
-
-          <YourFeedTab
-            token={props.token}
-            tab={props.tab}
-            onTabClick={props.onTabClick} />
 
           <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
 
