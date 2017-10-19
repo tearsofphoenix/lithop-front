@@ -24,41 +24,43 @@ const LoggedOutView = props => {
   return null;
 };
 
-const LoggedInView = props => {
-  if (props.currentUser) {
-    const showSearchInput = () => {
+class LoggedInView extends React.Component {
+  render() {
+    const props = this.props
+    if (props.currentUser) {
+      const showSearchInput = () => {
 
+      }
+      return (
+          <ul className="nav navbar-nav pull-xs-right white">
+            <li className="nav-item">
+              <a className="nav-link lp-search-icon" onClick={showSearchInput}>
+                <i className="ion-search"></i>
+              </a>
+              <input className="lp-search-input" type="search" placeholder="Search ..." required="true" />
+            </li>
+
+            <li className="nav-item">
+              <Link to="editor" className="nav-link">
+                <i className="ion-compose"></i>&nbsp;新文章
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link
+                  to={`@${props.currentUser.username}`}
+                  className="nav-link">
+                <img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} />
+                {props.currentUser.username}
+              </Link>
+            </li>
+
+          </ul>
+      );
     }
-    return (
-      <ul className="nav navbar-nav pull-xs-right white">
-        <li className="nav-item">
-          <a className="nav-link lp-search-icon" onClick={showSearchInput}>
-            <i className="ion-search"></i>
-          </a>
-          <input className="lp-search-input" type="search" placeholder="Search Medium" required="true" />
-        </li>
-
-        <li className="nav-item">
-          <Link to="editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;新文章
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            to={`@${props.currentUser.username}`}
-            className="nav-link">
-            <img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} />
-            {props.currentUser.username}
-          </Link>
-        </li>
-
-      </ul>
-    );
+    return null;
   }
-
-  return null;
-};
+}
 
 class Header extends React.Component {
   render() {
