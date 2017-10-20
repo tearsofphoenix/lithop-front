@@ -12,13 +12,13 @@ const YourFeedTab = props => {
     }
 
     return (
-      <li className="nav-item">
-        <a  href=""
-            className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
-            onClick={clickHandler}>
-          我的
-        </a>
-      </li>
+        <li className="nav-item">
+          <a href=""
+             className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
+             onClick={ clickHandler }>
+            我的
+          </a>
+        </li>
     );
   }
   return null;
@@ -30,14 +30,14 @@ const GlobalFeedTab = props => {
     props.onTabClick('all', agent.Articles.all, agent.Articles.all());
   };
   return (
-    <li className="nav-item">
-      <a
-        href=""
-        className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
-        onClick={clickHandler}>
-        全部
-      </a>
-    </li>
+      <li className="nav-item">
+        <a
+            href=""
+            className={ props.tab === 'all' ? 'nav-link active' : 'nav-link' }
+            onClick={ clickHandler }>
+          全部
+        </a>
+      </li>
   );
 };
 
@@ -47,11 +47,11 @@ const TagFilterTab = props => {
   }
 
   return (
-    <li className="nav-item">
-      <a href="" className="nav-link active">
-        <i className="ion-pound"></i> {props.tag}
-      </a>
-    </li>
+      <li className="nav-item">
+        <a href="" className="nav-link active">
+          <i className="ion-pound"></i> { props.tag }
+        </a>
+      </li>
   );
 };
 
@@ -67,28 +67,27 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const MainView = props => {
-  console.log(70, props)
   return (
-    <div className="col-md-10">
-      <div className="feed-toggle">
-        <ul className="nav nav-pills outline-active">
+      <div className="col-md-12">
+          <div className="feed-toggle">
+            <ul className="nav nav-pills outline-active">
 
-          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
+              <GlobalFeedTab tab={ props.tab } onTabClick={ props.onTabClick } />
 
-          <TagFilterTab tag={props.tag} />
+              <TagFilterTab tag={ props.tag } />
 
-        </ul>
+            </ul>
+          </div>
+
+          <ArticleList
+              pager={ props.pager }
+              articles={ props.articles }
+              loading={ props.loading }
+              articlesCount={ props.articlesCount }
+              currentPage={ props.currentPage }
+              loadFunc={ () => props.loadMore(props.tab, agent.Articles.all, agent.Articles.all()) }
+          />
       </div>
-
-      <ArticleList
-        pager={props.pager}
-        articles={props.articles}
-        loading={props.loading}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage}
-        loadFunc={() => props.loadMore(props.tab, agent.Articles.all, agent.Articles.all())}
-      />
-    </div>
   );
 };
 

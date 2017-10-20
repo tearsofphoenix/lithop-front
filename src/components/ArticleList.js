@@ -20,13 +20,13 @@ export default class ArticleList extends Component {
       articles: [],
       windowScrollerEnabled: true,
       overscanByPixels: 0,
-      columnWidth: 500,
+      columnWidth: 200,
       gutterSize: 10,
     };
 
     this._cache = new CellMeasurerCache({
       defaultHeight: 280,
-      defaultWidth: 500,
+      defaultWidth: 1000,
       fixedWidth: true,
     });
   }
@@ -69,11 +69,11 @@ export default class ArticleList extends Component {
     this._initCellPositioner();
 
     const {height, overscanByPixels, windowScrollerEnabled} = this.state;
-
+    const {articlesCount} = this.props;
     return (
         <Masonry
             autoHeight={windowScrollerEnabled}
-            cellCount={1000}
+            cellCount={articlesCount}
             cellMeasurerCache={this._cache}
             cellPositioner={this._cellPositioner}
             cellRenderer={this._cellRenderer}
@@ -134,7 +134,7 @@ export default class ArticleList extends Component {
     }
     const {overscanByPixels} = this.state;
     return (
-        <div>
+        <div className="lp-articlelist">
           <WindowScroller overscanByPixels={overscanByPixels}>
             {this._renderAutoSizer}
           </WindowScroller>

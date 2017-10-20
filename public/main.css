@@ -7065,6 +7065,8 @@ footer .attribution {
 .home-page .feed-toggle {
     margin-bottom: -1px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-left: 116px;
+    margin-right: 116px;
 }
 
 .home-page .sidebar {

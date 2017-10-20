@@ -40,6 +40,20 @@ class Home extends React.Component {
     this.props.onUnload();
   }
 
+  renderTags = () => {
+    return (<div className="col-md-2">
+      <div className="sidebar">
+
+        <p>热门标签</p>
+
+        <Tags
+            tags={this.props.tags}
+            onClickTag={this.props.onClickTag} />
+
+      </div>
+    </div>);
+  };
+
   render() {
     return (
       <div className="home-page">
@@ -49,18 +63,6 @@ class Home extends React.Component {
         <div className="container page">
           <div className="row">
             <MainView tab="all" />
-
-            <div className="col-md-2">
-              <div className="sidebar">
-
-                <p>热门标签</p>
-
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
           </div>
         </div>
 

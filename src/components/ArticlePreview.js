@@ -32,7 +32,7 @@ const ArticlePreview = props => {
       props.favorite(article.slug);
     }
   };
-
+  console.log(35, article.author);
   return (
       <div className="article-preview">
         <div className="article-preview-wrap">
@@ -43,20 +43,20 @@ const ArticlePreview = props => {
           <div className="lp-content-wrap">
             <div className="lp-flex1 lp-relative">
               <Link to={ `article/${article.slug}` } className="preview-link">
-              <h1>{ article.title }</h1>
-              <p>{ article.description }</p>
-              <ul className="tag-list">
-                {
-                  article.tagList.map(tag => {
-                    return (
-                        <li className="tag-default tag-pill tag-outline" key={ tag }>
-                          { tag }
-                        </li>
-                    )
-                  })
-                }
-              </ul>
-            </Link>
+                <h1>{ article.title }</h1>
+                <p>{ article.description }</p>
+                <ul className="tag-list">
+                  {
+                    article.tagList.map(tag => {
+                      return (
+                          <li className="tag-default tag-pill tag-outline" key={ tag }>
+                            { tag }
+                          </li>
+                      )
+                    })
+                  }
+                </ul>
+              </Link>
             </div>
             <div className="article-meta">
               <div>
@@ -68,9 +68,7 @@ const ArticlePreview = props => {
                   <Link className="author" to={ `@${article.author.username}` }>
                     { article.author.username }
                   </Link>
-                  <span className="date">
-            { new Date(article.createdAt).toDateString() }
-          </span>
+                  <span className="date">{ new Date(article.createdAt).toDateString() }</span>
                 </div>
               </div>
 
