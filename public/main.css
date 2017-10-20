@@ -1,6 +1,7 @@
 @import url("./base.css");
 @import url("./article.css");
 @import url("./avatar.css");
+@import url("./react-virtualized.css");
 
 .logo-font {
     font-family: "Titillium Web", sans-serif;

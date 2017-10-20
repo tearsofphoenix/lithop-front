@@ -40,11 +40,9 @@
 }
 
 .article-preview {
+    display: flex;
     padding-left: 10px;
     padding-right: 10px;
-    width: 50%;
-    min-width: 50%;
-    max-width: 50%;
 }
 
 .article-preview-wrap {
