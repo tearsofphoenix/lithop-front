@@ -1,7 +1,10 @@
 import ListErrors from './ListErrors';
 import React from 'react';
+import ReactDom from 'react-dom';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import AvatarCropper from "react-avatar-cropper";
+console.log(6, AvatarCropper);
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
@@ -13,7 +16,9 @@ class SettingsForm extends React.Component {
     super();
 
     this.state = {
-      image: '',
+      cropperOpen: false,
+      croppedImg: "http://www.fillmurray.com/400/400",
+      image: null,
       username: '',
       bio: '',
       email: '',
@@ -33,15 +38,39 @@ class SettingsForm extends React.Component {
       if (!user.password) {
         delete user.password;
       }
-
+      user.image = this.state.croppedImg;
       this.props.onSubmitForm(user);
     };
   }
 
+  handleFileChange = (dataURI) => {
+    this.setState({
+      image: dataURI,
+      croppedImg: this.state.croppedImg,
+      cropperOpen: true
+    });
+  }
+
+  handleCrop = (dataURI) => {
+    this.setState({
+      cropperOpen: false,
+      image: null,
+      croppedImg: dataURI
+    });
+  };
+  handleRequestHide = (event) => {
+    console.log(event);
+    this.setState({
+      cropperOpen: false
+    });
+  };
+
   componentWillMount() {
     if (this.props.currentUser) {
+      const image = this.props.currentUser.image || '';
       Object.assign(this.state, {
-        image: this.props.currentUser.image || '',
+        image,
+        croppedImg: image,
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
         email: this.props.currentUser.email
@@ -51,8 +80,10 @@ class SettingsForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentUser) {
+      const image = nextProps.currentUser.image || '';
       this.setState(Object.assign({}, this.state, {
-        image: nextProps.currentUser.image || '',
+        image,
+        croppedImg: image,
         username: nextProps.currentUser.username,
         bio: nextProps.currentUser.bio,
         email: nextProps.currentUser.email
@@ -66,12 +97,24 @@ class SettingsForm extends React.Component {
         <fieldset>
 
           <fieldset className="form-group">
-            <input
-              className="form-control"
-              type="text"
-              placeholder="URL of profile picture"
-              value={this.state.image}
-              onChange={this.updateState('image')} />
+              <div className="avatar-photo">
+                <FileUpload handleFileChange={this.handleFileChange} />
+                <div className="avatar-edit">
+                  <span>Click to Pick Avatar</span>
+                  <i className="fa fa-camera"></i>
+                </div>
+                <img src={this.state.croppedImg} />
+              </div>
+              {this.state.cropperOpen &&
+              <AvatarCropper
+                  onRequestHide={this.handleRequestHide}
+                  cropperOpen={this.state.cropperOpen}
+                  onCrop={this.handleCrop}
+                  image={this.state.image}
+                  width={400}
+                  height={400}
+              />
+              }
           </fieldset>
 
           <fieldset className="form-group">
@@ -135,6 +178,26 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: SETTINGS_SAVED, payload: agent.Auth.save(user) }),
   onUnload: () => dispatch({ type: SETTINGS_PAGE_UNLOADED })
 });
+
+class FileUpload extends React.Component {
+
+  handleFile = (e) => {
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    if (!file) return;
+
+    reader.onload = function(img) {
+      ReactDom.findDOMNode(this.refs.in).value = '';
+      this.props.handleFileChange(img.target.result);
+    }.bind(this);
+    reader.readAsDataURL(file);
+  }
+
+  render() {
+    return (<input ref="in" type="file" accept="image/*" onChange={this.handleFile} />);
+  }
+}
 
 class Settings extends React.Component {
   render() {

@@ -1,0 +1,69 @@
+
+.avatar-photo {
+    position: relative;
+    background-color: #666;
+    height: 400px;
+    width: 400px;
+    overflow: hidden;
+    border-radius: 3px;
+    box-shadow: 0 0 0 6px #fff, 0 0 0 7px #ccc;
+    z-index: 3;
+}
+
+.avatar-edit span {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 900;
+    text-align: center;
+    position: absolute;
+    z-index: 5;
+    bottom: 5px;
+    right: 5px;
+    color: white;
+}
+
+.avatar-photo input[type=file] {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    -moz-opacity:0 ;
+    filter:alpha(opacity: 0);
+    opacity: 0;
+    z-index: 9;
+}
+
+.avatar-edit {
+    text-align: center;
+}
+.avatar-edit i {
+    text-align: center;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    position: absolute;
+    z-index: 5;
+    color:white;
+    top: 24px;
+    right: 24px;
+    font-size: 92px;
+    opacity: 0.2;
+}
+.avatar-photo:hover {
+    cursor: pointer;
+}
+.avatar-photo:hover .avatar-edit i {
+    opacity: 0.8;
+    font-size: 100px;
+}
