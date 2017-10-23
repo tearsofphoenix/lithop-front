@@ -18,7 +18,6 @@ export default class ArticleList extends Component {
     super(props, context);
     this.state = {
       articles: [],
-      windowScrollerEnabled: true,
       overscanByPixels: 0,
       columnWidth: 200,
       gutterSize: 10,
@@ -68,16 +67,18 @@ export default class ArticleList extends Component {
     this._calculateColumnCount();
     this._initCellPositioner();
 
-    const {height, overscanByPixels, windowScrollerEnabled} = this.state;
+    const {height, overscanByPixels} = this.state;
     const {articlesCount} = this.props;
+    const h = Number(this._height || 10);
+    console.error(73, h);
     return (
         <Masonry
-            autoHeight={windowScrollerEnabled}
+            autoHeight
             cellCount={articlesCount}
             cellMeasurerCache={this._cache}
             cellPositioner={this._cellPositioner}
             cellRenderer={this._cellRenderer}
-            height={windowScrollerEnabled ? this._height : height}
+            height={h}
             overscanByPixels={overscanByPixels}
             ref={ref => this._masonry = ref}
             scrollTop={this._scrollTop}
@@ -97,6 +98,7 @@ export default class ArticleList extends Component {
 
     const {articles} = this.props;
     const article = articles[index % articles.length];
+    console.log(100, articles, article);
     return (
         <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
           <div

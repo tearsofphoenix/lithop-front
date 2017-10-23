@@ -2,6 +2,14 @@
     flex: 1 1 auto !important;
 }
 
+.lp-flex {
+    display: flex;
+}
+
+.svgIcon-use {
+    fill: white;
+}
+
 .lp-relative {
     position: relative !important;
 }
@@ -9,41 +17,31 @@
 .lp-search-icon {
     display: inline-block !important;
     padding-left: 10px;
-    padding-right: 10px;
     height: 38px
 }
 
 .lp-search-input {
-    height: 38px;
-    display: inline-block;
-    vertical-align: middle;
-    width: 140px;
-    line-height: 38px;
-    border: none;
-    transition: width .2s,padding .2s;
-    cursor: pointer;
-    -webkit-appearance: none;
-    box-sizing: border-box;
-    box-shadow: none;
-    color: rgba(0, 0, 0, 0.8);
-    background: 0 0;
     font-size: 14px;
     outline: 0;
+    background: transparent;
+    display: inline-block;
+    vertical-align: middle;
     color: white;
-    background: white;
-    border-radius: 4em;
-    padding: 0 5px 0 20px;
+    height: 37px;
+    border: none;
+    transition: width .2s,padding .2s;
+}
+
+input[type="search"].lp-search-input::-webkit-input-placeholder {
+    color: white;
 }
 
 .footer-wrap {
     border-top: 1px solid rgba(0,0,0,.05)!important;
-    padding-bottom: 25px;
-    padding-top: 10px;
     flex-wrap: wrap;
     word-break: break-word;
     word-wrap: break-word;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 10px 20px 25px;
 }
 
 .footer-link {

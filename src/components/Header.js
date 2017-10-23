@@ -41,20 +41,13 @@ class LoggedInView extends React.Component {
     const props = this.props
     if (props.currentUser) {
       const searchStyle = {
-        display: 'inline-block',
-        verticalAlign: 'middle',
-        color: 'rgba(0, 0, 0, 0.84)',
         width: this.state.showSearchInput ? '190px' : '1px',
-        height: '37px',
-        border: 'none',
-        transition: 'width .2s,padding .2s',
         cursor: this.state.showSearchInput ? 'text' : 'pointer',
-        paddingLeft: 0,
-        paddingRight: 0
+        paddingLeft: this.state.showSearchInput ? '10px' : 0
       };
       return (
           <ul className="nav navbar-nav pull-xs-right white">
-            <li className="nav-item">
+            <li className="nav-item lp-flex">
               <a className="nav-link lp-search-icon" onClick={ this.showSearchInput }>
                 <span className="svgIcon svgIcon--search svgIcon--25px u-top0 u-baseColor--iconLight">
                   <svg className="svgIcon-use" width="25" height="25" viewBox="0 0 25 25">
