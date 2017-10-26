@@ -121,7 +121,7 @@ class SettingsForm extends React.Component {
             <input
               className="form-control form-control-lg"
               type="text"
-              placeholder="Username"
+              placeholder="用户名"
               value={this.state.username}
               onChange={this.updateState('username')} />
           </fieldset>
@@ -130,7 +130,7 @@ class SettingsForm extends React.Component {
             <textarea
               className="form-control form-control-lg"
               rows="8"
-              placeholder="Short bio about you"
+              placeholder="个人简介"
               value={this.state.bio}
               onChange={this.updateState('bio')}>
             </textarea>
@@ -140,7 +140,7 @@ class SettingsForm extends React.Component {
             <input
               className="form-control form-control-lg"
               type="email"
-              placeholder="Email"
+              placeholder="邮箱"
               value={this.state.email}
               onChange={this.updateState('email')} />
           </fieldset>
@@ -149,7 +149,7 @@ class SettingsForm extends React.Component {
             <input
               className="form-control form-control-lg"
               type="password"
-              placeholder="New Password"
+              placeholder="新密码"
               value={this.state.password}
               onChange={this.updateState('password')} />
           </fieldset>
@@ -158,7 +158,7 @@ class SettingsForm extends React.Component {
             className="btn btn-lg btn-primary pull-xs-right"
             type="submit"
             disabled={this.state.inProgress}>
-            Update Settings
+            保存
           </button>
 
         </fieldset>
@@ -207,7 +207,7 @@ class Settings extends React.Component {
           <div className="row">
             <div className="col-md-6 offset-md-3 col-xs-12">
 
-              <h1 className="text-xs-center">Your Settings</h1>
+              <h1 className="text-xs-center">个人设置</h1>
 
               <ListErrors errors={this.props.errors}></ListErrors>
 
@@ -220,7 +220,7 @@ class Settings extends React.Component {
               <button
                 className="btn btn-outline-danger"
                 onClick={this.props.onClickLogout}>
-                Logout
+                登出
               </button>
 
             </div>

@@ -43,6 +43,7 @@
     display: flex;
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 10px;
 }
 
 .article-preview-wrap {
@@ -139,4 +140,8 @@
 .lp-articlelist {
     margin-left: 116px;
     margin-right: 116px;
+}
+
+.ReactVirtualized__Masonry {
+    outline: none;
 }

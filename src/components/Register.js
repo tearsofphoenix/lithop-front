@@ -56,7 +56,7 @@ class Register extends React.Component {
               <h1 className="text-xs-center">注册</h1>
               <p className="text-xs-center">
                 <Link to="login">
-                  Have an account?
+                  已有账户?
                 </Link>
               </p>
 
@@ -69,7 +69,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Username"
+                      placeholder="用户名"
                       value={this.props.username}
                       onChange={this.changeUsername} />
                   </fieldset>
@@ -78,7 +78,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="email"
-                      placeholder="Email"
+                      placeholder="邮箱"
                       value={this.props.email}
                       onChange={this.changeEmail} />
                   </fieldset>
@@ -87,7 +87,7 @@ class Register extends React.Component {
                     <input
                       className="form-control form-control-lg"
                       type="password"
-                      placeholder="Password"
+                      placeholder="密码"
                       value={this.props.password}
                       onChange={this.changePassword} />
                   </fieldset>

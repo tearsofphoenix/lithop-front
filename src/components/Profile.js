@@ -16,7 +16,7 @@ const EditProfileSettings = props => {
       <Link
         to="settings"
         className="btn btn-sm btn-outline-secondary action-btn">
-        <i className="ion-gear-a"></i> Edit Profile Settings
+        <i className="ion-gear-a"></i> 编辑个人设置
       </Link>
     );
   }
@@ -143,20 +143,16 @@ class Profile extends React.Component {
         </div>
 
         <div className="container">
-          <div className="row">
+          <div>
+            <div className="articles-toggle">
+              {this.renderTabs()}
+            </div>
 
-            <div className="col-xs-12 col-md-10 offset-md-1">
-
-              <div className="articles-toggle">
-                {this.renderTabs()}
-              </div>
-
-              <ArticleList
+            <ArticleList
                 pager={this.props.pager}
                 articles={this.props.articles}
                 articlesCount={this.props.articlesCount}
                 state={this.props.currentPage} />
-            </div>
 
           </div>
         </div>

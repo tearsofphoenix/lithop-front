@@ -1,6 +1,7 @@
 import Banner from './Banner';
 import MainView from './MainView';
 import React from 'react';
+import Alert from 'react-s-alert';
 import Tags from './Tags';
 import Footer from '../Footer';
 import agent from '../../agent';
@@ -65,6 +66,7 @@ class Home extends React.Component {
         </div>
 
         <Footer />
+        <Alert stack timeout={3000} />
       </div>
     );
   }

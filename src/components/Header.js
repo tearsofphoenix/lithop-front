@@ -55,7 +55,7 @@ class LoggedInView extends React.Component {
                   </svg>
                 </span>
               </a>
-              <input className="lp-search-input" style={ searchStyle } type="search" placeholder="Search ..."
+              <input className="lp-search-input" style={ searchStyle } type="search" placeholder="搜索 ..."
                      required="true" />
             </li>
 

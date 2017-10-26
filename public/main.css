@@ -2,6 +2,7 @@
 @import url("./article.css");
 @import url("./avatar.css");
 @import url("./react-virtualized.css");
+@import url("./s-alert-default.css");
 
 .logo-font {
     font-family: "Titillium Web", sans-serif;
@@ -7224,7 +7225,7 @@ footer .attribution {
 }
 
 .profile-page .articles-toggle {
-    margin: 1.5rem 0 -1px 0;
+    margin: 1.5rem 116px -1px;
 }
 
 .editor-page .tag-list i {

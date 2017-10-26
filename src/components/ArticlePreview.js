@@ -2,10 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import Alert from 'react-s-alert';
 import { ARTICLE_FAVORITED, ARTICLE_UNFAVORITED } from '../constants/actionTypes';
 
 const FAVORITED_CLASS = 'btn btn-sm btn-primary';
 const NOT_FAVORITED_CLASS = 'btn btn-sm btn-outline-primary';
+
+const mapStateToProps = state => ({
+  token: state.common.token
+});
 
 const mapDispatchToProps = dispatch => ({
   favorite: slug => dispatch({
@@ -26,13 +31,19 @@ const ArticlePreview = props => {
 
   const handleClick = ev => {
     ev.preventDefault();
-    if (article.favorited) {
-      props.unfavorite(article.slug);
+    if (props.token) {
+      if (article.favorited) {
+        props.unfavorite(article.slug);
+      } else {
+        props.favorite(article.slug);
+      }
     } else {
-      props.favorite(article.slug);
+      console.log(Alert.error, 41);
+      Alert.error('请先登录！', {
+        position: 'top-right'
+      });
     }
   };
-  console.log(35, article.author);
   return (
       <div className="article-preview">
         <div className="article-preview-wrap">
@@ -84,4 +95,4 @@ const ArticlePreview = props => {
   );
 }
 
-export default connect(() => ({}), mapDispatchToProps)(ArticlePreview);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlePreview);
