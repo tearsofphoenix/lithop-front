@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
-import { Masonry, WindowScroller, CellMeasurer, CellMeasurerCache, createMasonryCellPositioner, AutoSizer } from 'react-virtualized';
+import {
+  Masonry, WindowScroller, CellMeasurer, CellMeasurerCache,
+  createMasonryCellPositioner, AutoSizer
+} from 'react-virtualized';
 
 export default class ArticleList extends Component {
   static propTypes = {
@@ -16,135 +19,151 @@ export default class ArticleList extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      articles: [],
-      overscanByPixels: 0,
-      columnWidth: 200,
-      gutterSize: 10,
-    };
+
+    this._columnCount = 0;
 
     this._cache = new CellMeasurerCache({
-      defaultHeight: 280,
-      defaultWidth: 1000,
-      fixedWidth: true,
+      defaultHeight: 250,
+      defaultWidth: 500,
+      fixedWidth: true
     });
+
+    this._columnHeights = {};
+
+    this.state = {
+      columnWidth: 500,
+      height: 280,
+      gutterSize: 10,
+      overscanByPixels: 0,
+      windowScrollerEnabled: true
+    };
+
+    this._onResize = this._onResize.bind(this);
+    this._renderAutoSizer = this._renderAutoSizer.bind(this);
+    this._setMasonryRef = this._setMasonryRef.bind(this);
   }
 
-  _renderAutoSizer = ({height, scrollTop}) => {
-    this._height = height;
-    this._scrollTop = scrollTop;
+  render() {
+    const { overscanByPixels } = this.state;
+    const { articles = [] } = this.props;
+    let child;
+    if (articles.length === 0) {
+      child = (<div></div>);
+    } else {
+      child = (
+          <WindowScroller overscanByPixels={ overscanByPixels }>
+            { this._renderAutoSizer }
+          </WindowScroller>
+      );
+    }
+    return (
+        <div className="lp-articlelist">
+          { child }
+        </div>
+    );
+  }
 
-    const {overscanByPixels} = this.state;
+  _calculateColumnCount() {
+    const { columnWidth, gutterSize } = this.state;
+
+    this._columnCount = Math.floor(this._width / (columnWidth + gutterSize));
+  }
+
+  _cellRenderer = ({ index, key, parent, style }) => {
+    console.log(69, this.props);
+    const { articles = [] } = this.props;
+    const { columnWidth } = this.state;
+
+    const article = articles[index % articles.length];
 
     return (
-        <AutoSizer
-            disableHeight
-            height={height}
-            onResize={this._onResize}
-            overscanByPixels={overscanByPixels}
-            scrollTop={this._scrollTop}>
-          {this._renderMasonry}
-        </AutoSizer>
+        <CellMeasurer cache={ this._cache } index={ index } key={ key } parent={ parent }>
+          <div
+              style={ {
+                ...style,
+                width: columnWidth
+              } }>
+            <ArticlePreview article={ article } />
+          </div>
+        </CellMeasurer>
     );
-  };
+  }
 
-  _initCellPositioner = () => {
+  _initCellPositioner() {
     if (typeof this._cellPositioner === 'undefined') {
-      const {columnWidth, gutterSize} = this.state;
+      const { columnWidth, gutterSize } = this.state;
 
       this._cellPositioner = createMasonryCellPositioner({
         cellMeasurerCache: this._cache,
         columnCount: this._columnCount,
         columnWidth,
-        spacer: gutterSize,
+        spacer: gutterSize
       });
     }
-  };
+  }
 
-  _renderMasonry = ({width}) => {
+  _onResize({ width }) {
+    this._width = width;
+
+    this._columnHeights = {};
+    this._calculateColumnCount();
+    this._resetCellPositioner();
+    this._masonry.recomputeCellPositions();
+  }
+
+  _renderAutoSizer({ height, scrollTop }) {
+    this._height = height;
+    this._scrollTop = scrollTop;
+
+    const { overscanByPixels } = this.state;
+
+    return (
+        <AutoSizer
+            disableHeight
+            height={ height }
+            onResize={ this._onResize }
+            overscanByPixels={ overscanByPixels }
+            scrollTop={ this._scrollTop }>
+          { this._renderMasonry }
+        </AutoSizer>
+    );
+  }
+
+  _renderMasonry = ({ width }) => {
     this._width = width;
 
     this._calculateColumnCount();
     this._initCellPositioner();
 
-    const {height, overscanByPixels} = this.state;
-    const {articlesCount} = this.props;
-    const h = Number(this._height || 10);
-    console.error(73, h);
+    const { height, overscanByPixels, windowScrollerEnabled } = this.state;
+    const {articles = []} = this.props;
     return (
         <Masonry
-            autoHeight
-            cellCount={articlesCount}
-            cellMeasurerCache={this._cache}
-            cellPositioner={this._cellPositioner}
-            cellRenderer={this._cellRenderer}
-            height={h}
-            overscanByPixels={overscanByPixels}
-            ref={ref => this._masonry = ref}
-            scrollTop={this._scrollTop}
-            width={width}
+            autoHeight={ windowScrollerEnabled }
+            cellCount={ articles.length }
+            cellMeasurerCache={ this._cache }
+            cellPositioner={ this._cellPositioner }
+            cellRenderer={ this._cellRenderer }
+            height={ windowScrollerEnabled ? this._height : height }
+            overscanByPixels={ overscanByPixels }
+            ref={ this._setMasonryRef }
+            scrollTop={ this._scrollTop }
+            width={ width }
         />
     );
-  };
+  }
 
-  _calculateColumnCount = () => {
-    const {columnWidth, gutterSize} = this.state;
+  _resetCellPositioner() {
+    const { columnWidth, gutterSize } = this.state;
 
-    this._columnCount = Math.floor(this._width / (columnWidth + gutterSize));
-  };
+    this._cellPositioner.reset({
+      columnCount: this._columnCount,
+      columnWidth,
+      spacer: gutterSize
+    });
+  }
 
-  _cellRenderer = ({index, key, parent, style}) => {
-    const {columnWidth} = this.state;
-
-    const {articles} = this.props;
-    const article = articles[index % articles.length];
-    console.log(100, articles, article);
-    return (
-        <CellMeasurer cache={this._cache} index={index} key={key} parent={parent}>
-          <div
-              style={{
-                ...style,
-                width: columnWidth,
-              }}>
-            <div
-                style={{
-                  borderRadius: '0.5rem',
-                  marginBottom: '0.5rem',
-                  width: '100%',
-                }}
-            />
-            <ArticlePreview article={article} />
-          </div>
-        </CellMeasurer>
-    );
-  };
-
-  render() {
-    const props = this.props;
-    if (!props.articles) {
-      return (
-          <div className="article-preview">Loading...</div>
-      );
-    }
-
-    if (props.articles.length === 0) {
-      return (
-          <div className="article-preview">
-            No articles are here... yet.
-          </div>
-      );
-    }
-    const {overscanByPixels} = this.state;
-    return (
-        <div className="lp-articlelist">
-          <WindowScroller overscanByPixels={overscanByPixels}>
-            {this._renderAutoSizer}
-          </WindowScroller>
-          <ListPagination
-              pager={ props.pager }
-              articlesCount={ props.articlesCount }
-              currentPage={ props.currentPage } />
-        </div>
-    );
+  _setMasonryRef(ref) {
+    this._masonry = ref;
   }
 }

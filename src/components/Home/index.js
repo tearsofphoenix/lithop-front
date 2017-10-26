@@ -61,9 +61,7 @@ class Home extends React.Component {
         <Banner token={this.props.token} appName={this.props.appName} />
 
         <div className="container page">
-          <div className="row">
-            <MainView tab="all" />
-          </div>
+          <MainView tab="all" />
         </div>
 
         <Footer />
