@@ -32,26 +32,33 @@ class Article extends React.Component {
   }
 
   render() {
-    if (!this.props.article) {
+    const {article} = this.props;
+    if (!article) {
       return null;
     }
-
-    const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
+    const markup = { __html: marked(article.body, { sanitize: true }) };
     const canModify = this.props.currentUser &&
-      this.props.currentUser.username === this.props.article.author.username;
+      this.props.currentUser.username === article.author.username;
+    const imageStyle = {};
+    if (article.image) {
+      imageStyle.backgroundImage = `url(${article.image})`;
+      imageStyle.backgroundSize = 'cover';
+      imageStyle.minHeight = '200px';
+    }
     return (
       <div className="article-page">
 
         <div className="banner">
           <div className="container">
-
-            <h1>{this.props.article.title}</h1>
+            <h1>{article.title}</h1>
             <ArticleMeta
-              article={this.props.article}
+              article={article}
               canModify={canModify} />
 
           </div>
         </div>
+
+        <div style={imageStyle} />
 
         <div className="container page">
 
@@ -62,7 +69,7 @@ class Article extends React.Component {
 
               <ul className="tag-list">
                 {
-                  this.props.article.tagList.map(tag => {
+                  article.tagList.map(tag => {
                     return (
                       <li
                         className="tag-default tag-pill tag-outline"

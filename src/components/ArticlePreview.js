@@ -44,10 +44,15 @@ const ArticlePreview = props => {
       });
     }
   };
+  const imageStyle = {};
+  if (article.image) {
+    imageStyle.backgroundImage = `url(${article.image})`;
+    imageStyle.backgroundSize = 'cover';
+  }
   return (
       <div className="article-preview">
         <div className="article-preview-wrap">
-          <div className="lp-article-image">
+          <div className="lp-article-image" style={imageStyle}>
             <Link to={ `article/${article.slug}` } />
           </div>
 
