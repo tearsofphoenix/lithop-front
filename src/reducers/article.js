@@ -2,7 +2,8 @@ import {
   ARTICLE_PAGE_LOADED,
   ARTICLE_PAGE_UNLOADED,
   ADD_COMMENT,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  SEARCH_ARTICLE
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {

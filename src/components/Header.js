@@ -1,5 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { SEARCH_ARTICLE } from '../constants/actionTypes'
+
+const mapDispatchToProps = dispatch => ({
+  searchArticle: (value, payload) => dispatch({ type: SEARCH_ARTICLE, payload })
+});
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -35,7 +42,12 @@ class LoggedInView extends React.Component {
   showSearchInput = () => {
     const { showSearchInput } = this.state;
     this.setState({ showSearchInput: !showSearchInput });
-  }
+  };
+
+  searchArticle = (event) => {
+    const {value} = event.target;
+    this.props.searchArticle(value);
+  };
 
   render() {
     const props = this.props
@@ -56,6 +68,7 @@ class LoggedInView extends React.Component {
                 </span>
               </a>
               <input className="lp-search-input" style={ searchStyle } type="search" placeholder="搜索 ..."
+                     onChange={this.searchArticle}
                      required="true" />
             </li>
 
@@ -81,6 +94,10 @@ class LoggedInView extends React.Component {
 }
 
 class Header extends React.Component {
+  static propTypes = {
+    searchArticle: PropTypes.func
+  };
+
   render() {
     return (
         <nav className="navbar navbar-light">
@@ -92,11 +109,11 @@ class Header extends React.Component {
 
             <LoggedOutView currentUser={ this.props.currentUser } />
 
-            <LoggedInView currentUser={ this.props.currentUser } />
+            <LoggedInView currentUser={ this.props.currentUser } searchArticle={this.props.searchArticle} />
           </div>
         </nav>
     );
   }
 }
 
-export default Header;
+export default connect(() => ({}), mapDispatchToProps)(Header);
