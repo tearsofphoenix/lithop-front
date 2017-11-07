@@ -96,11 +96,11 @@ class SettingsForm extends React.Component {
       <form onSubmit={this.submitForm}>
         <fieldset>
 
-          <fieldset className="form-group">
+          <fieldset className="form-group" style={{paddingLeft: '20px'}}>
               <div className="avatar-photo">
-                <FileUpload handleFileChange={this.handleFileChange} />
+                <FileUpload handleFileChange={this.handleFileChange} placeholder="无图片" />
                 <div className="avatar-edit">
-                  <span>Click to Pick Avatar</span>
+                  <span style={{color: '#222'}}>选择图片</span>
                   <i className="fa fa-camera"></i>
                 </div>
                 <img src={this.state.croppedImg} />
