@@ -40,6 +40,10 @@ input[type="search"].lp-search-input::-webkit-input-placeholder {
     color: white;
 }
 
+input[type="password"].form-control {
+    letter-spacing: 10px !important;
+}
+
 .footer-wrap {
     border-top: 1px solid rgba(0,0,0,.05)!important;
     flex-wrap: wrap;
