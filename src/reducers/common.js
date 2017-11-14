@@ -29,6 +29,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         token: action.token || null,
+        uptoken: action.uptoken || null,
         appLoaded: true,
         currentUser: action.payload ? action.payload.user : null
       };
@@ -51,6 +52,7 @@ export default (state = defaultState, action) => {
         ...state,
         redirectTo: action.error ? null : '/',
         token: action.error ? null : action.payload.user.token,
+        uptoken: action.error ? null : action.payload.uptoken,
         currentUser: action.error ? null : action.payload.user
       };
     case DELETE_ARTICLE:

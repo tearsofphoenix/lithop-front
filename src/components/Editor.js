@@ -1,9 +1,11 @@
 import ListErrors from './ListErrors';
+import PropTypes from 'prop-types';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import AvatarCropper from "react-avatar-cropper";
 import FileUpload from './FileUpload';
+import FileUploader from './FileUploader';
 import {
   ADD_TAG,
   EDITOR_PAGE_LOADED,
@@ -14,7 +16,8 @@ import {
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
-  ...state.editor
+  ...state.editor,
+  uptoken: state.common.uptoken
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -33,6 +36,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Editor extends React.Component {
+  static propTypes = {
+    uptoken: PropTypes.string
+  };
   constructor() {
     super();
 
@@ -144,24 +150,7 @@ class Editor extends React.Component {
                   </fieldset>
 
                   <fieldset className="form-group" style={{paddingLeft: '20px'}}>
-                    <div className="avatar-photo">
-                      <FileUpload handleFileChange={this.handleFileChange} placeholder="无图片" />
-                      <div className="avatar-edit">
-                        <span style={{color: '#222'}}>选择图片</span>
-                        <i className="fa fa-camera"></i>
-                      </div>
-                      <img src={this.state.croppedImg} />
-                    </div>
-                    {this.state.cropperOpen &&
-                    <AvatarCropper
-                      onRequestHide={this.handleRequestHide}
-                      cropperOpen={this.state.cropperOpen}
-                      onCrop={this.handleCrop}
-                      image={this.state.image}
-                      width={400}
-                      height={400}
-                    />
-                    }
+                    <FileUploader uptoken={this.props.uptoken} />
                   </fieldset>
 
                   <fieldset className="form-group">

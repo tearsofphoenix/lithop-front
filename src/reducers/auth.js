@@ -11,6 +11,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case LOGIN:
     case REGISTER:
+      console.log(14, 'did login', action);
       return {
         ...state,
         inProgress: false,
