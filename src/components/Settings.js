@@ -1,23 +1,23 @@
 import ListErrors from './ListErrors';
+import PropTypes from 'prop-types';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
-import AvatarCropper from "react-avatar-cropper";
 import {
   SETTINGS_SAVED,
   SETTINGS_PAGE_UNLOADED,
   LOGOUT
 } from '../constants/actionTypes';
-import FileUpload from './FileUpload';
+import ImageUpload from './ImageUpload';
 
 class SettingsForm extends React.Component {
+  static propTypes = {
+    uptoken: PropTypes.string
+  };
   constructor() {
     super();
 
     this.state = {
-      cropperOpen: false,
-      croppedImg: "http://www.fillmurray.com/400/400",
-      image: null,
       username: '',
       bio: '',
       email: '',
@@ -41,28 +41,6 @@ class SettingsForm extends React.Component {
       this.props.onSubmitForm(user);
     };
   }
-
-  handleFileChange = (dataURI) => {
-    this.setState({
-      image: dataURI,
-      croppedImg: this.state.croppedImg,
-      cropperOpen: true
-    });
-  }
-
-  handleCrop = (dataURI) => {
-    this.setState({
-      cropperOpen: false,
-      image: null,
-      croppedImg: dataURI
-    });
-  };
-  handleRequestHide = (event) => {
-    console.log(event);
-    this.setState({
-      cropperOpen: false
-    });
-  };
 
   componentWillMount() {
     if (this.props.currentUser) {
@@ -89,31 +67,16 @@ class SettingsForm extends React.Component {
       }));
     }
   }
+  didUpload = () => {
 
+  };
   render() {
     return (
       <form onSubmit={this.submitForm}>
         <fieldset>
 
           <fieldset className="form-group" style={{paddingLeft: '20px'}}>
-              <div className="avatar-photo">
-                <FileUpload handleFileChange={this.handleFileChange} placeholder="无图片" />
-                <div className="avatar-edit">
-                  <span style={{color: '#222'}}>选择图片</span>
-                  <i className="fa fa-camera"></i>
-                </div>
-                <img src={this.state.croppedImg} />
-              </div>
-              {this.state.cropperOpen &&
-              <AvatarCropper
-                  onRequestHide={this.handleRequestHide}
-                  cropperOpen={this.state.cropperOpen}
-                  onCrop={this.handleCrop}
-                  image={this.state.image}
-                  width={400}
-                  height={400}
-              />
-              }
+            <ImageUpload didUpload={this.didUpload} token={this.props.uptoken} />
           </fieldset>
 
           <fieldset className="form-group">
@@ -168,6 +131,7 @@ class SettingsForm extends React.Component {
 
 const mapStateToProps = state => ({
   ...state.settings,
+  uptoken: state.common.uptoken,
   currentUser: state.common.currentUser
 });
 
@@ -180,6 +144,9 @@ const mapDispatchToProps = dispatch => ({
 
 
 class Settings extends React.Component {
+  static propTypes = {
+    uptoken: PropTypes.string
+  };
   render() {
     return (
       <div className="settings-page">
@@ -193,7 +160,8 @@ class Settings extends React.Component {
 
               <SettingsForm
                 currentUser={this.props.currentUser}
-                onSubmitForm={this.props.onSubmitForm} />
+                onSubmitForm={this.props.onSubmitForm}
+                uptoken={this.props.uptoken} />
 
               <hr />
 

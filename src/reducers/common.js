@@ -29,7 +29,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         token: action.token || null,
-        uptoken: action.uptoken || null,
+        uptoken: action.payload.uptoken || null,
         appLoaded: true,
         currentUser: action.payload ? action.payload.user : null
       };

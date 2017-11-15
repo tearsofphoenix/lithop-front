@@ -17,22 +17,12 @@ module.exports = Object.assign({
   apiHost: APIHOST || 'localhost',
   apiPort: APIPORT,
   app: {
-    title: 'UHS',
+    title: 'Lithop',
     description: '',
     head: {
-      titleTemplate: 'UHS: %s',
+      titleTemplate: 'Lithop: %s',
       meta: [
-        {name: 'description', content: ''},
-        {charset: 'utf-8'},
-        {property: 'og:site_name', content: 'UHS'},
-        {property: 'og:locale', content: 'zh_CN'},
-        {property: 'og:title', content: 'UHS'},
-        {property: 'og:description', content: 'Universal Health System.'},
-        {property: 'og:card', content: 'summary'},
-        {property: 'og:site', content: '@lxm'},
-        {property: 'og:creator', content: '@lxm'},
-        {property: 'og:image:width', content: '200'},
-        {property: 'og:image:height', content: '200'}
+        {charset: 'utf-8'}
       ]
     }
   },
