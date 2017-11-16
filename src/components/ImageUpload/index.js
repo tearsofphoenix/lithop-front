@@ -3,6 +3,7 @@ import {findDOMNode} from 'react-dom';
 import PropTypes from 'prop-types';
 import AvatarCropper from "react-avatar-cropper";
 import request from 'superagent-bluebird-promise';
+import Agent from '../../agent';
 
 const kUploadURL = 'http://up-z2.qiniu.com';
 const kDownloadURL = 'http://oy26nqeof.bkt.clouddn.com';
@@ -63,7 +64,7 @@ class ImageUpload extends Component {
 
   handleCrop = (dataURI) => {
     this.setState({
-      cropperOpen: false,
+      cropperOpen: true,
       image: null,
       croppedImg: dataURI
     });
@@ -77,19 +78,24 @@ class ImageUpload extends Component {
   upload = (file) => {
     if (!file || file.size === 0) return null;
     let key = file.name;
-    const r = request
-      .post(kUploadURL)
-      .field('key', key)
-      .field('token', this.props.token)
-      .field('x:filename', file.name)
-      .field('x:size', file.size)
-      .attach('file', file, file.name)
-      .set('Accept', 'application/json');
-    r.then(response => {
-      this.setState({image: `${kDownloadURL}/${file.name}`});
-      this.props.didUpload(response);
-    });
-    return r;
+    Agent.File.uptoken()
+      .then(response => {
+        console.log(84, response);
+        const {uptoken} = response;
+        const r = request
+          .post(kUploadURL)
+          .field('key', key)
+          .field('token', uptoken)
+          .field('x:filename', file.name)
+          .field('x:size', file.size)
+          .attach('file', file, file.name)
+          .set('Accept', 'application/json');
+        r.then(resp => {
+          console.error(94, resp);
+          this.setState({image: `${kDownloadURL}/${file.name}`});
+          this.props.didUpload(resp);
+        });
+      });
   };
 
   render() {

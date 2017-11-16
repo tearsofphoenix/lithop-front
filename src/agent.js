@@ -86,11 +86,16 @@ const Profile = {
     requests.del(`/profiles/${username}/follow`)
 };
 
+const File = {
+  uptoken: () => requests.get('/file/uptoken')
+};
+
 export default {
   Articles,
   Auth,
   Comments,
   Profile,
   Tags,
+  File,
   setToken: _token => { token = _token; }
 };

@@ -11,9 +11,6 @@ import {
 import ImageUpload from './ImageUpload';
 
 class SettingsForm extends React.Component {
-  static propTypes = {
-    uptoken: PropTypes.string
-  };
   constructor() {
     super();
 
@@ -75,7 +72,7 @@ class SettingsForm extends React.Component {
       <form onSubmit={this.submitForm}>
         <fieldset>
 
-          <fieldset className="form-group" style={{paddingLeft: '20px'}}>
+          <fieldset className="form-group">
             <ImageUpload didUpload={this.didUpload} token={this.props.uptoken} />
           </fieldset>
 
@@ -131,7 +128,6 @@ class SettingsForm extends React.Component {
 
 const mapStateToProps = state => ({
   ...state.settings,
-  uptoken: state.common.uptoken,
   currentUser: state.common.currentUser
 });
 
@@ -144,9 +140,6 @@ const mapDispatchToProps = dispatch => ({
 
 
 class Settings extends React.Component {
-  static propTypes = {
-    uptoken: PropTypes.string
-  };
   render() {
     return (
       <div className="settings-page">

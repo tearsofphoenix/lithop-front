@@ -16,8 +16,7 @@ import {
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({
-  ...state.editor,
-  uptoken: state.common.uptoken
+  ...state.editor
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -36,9 +35,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Editor extends React.Component {
-  static propTypes = {
-    uptoken: PropTypes.string
-  };
   constructor() {
     super();
 
