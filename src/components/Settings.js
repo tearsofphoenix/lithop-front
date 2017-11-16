@@ -34,7 +34,7 @@ class SettingsForm extends React.Component {
       if (!user.password) {
         delete user.password;
       }
-      user.image = this.state.croppedImg;
+      user.image = this.state.image;
       this.props.onSubmitForm(user);
     };
   }
@@ -44,7 +44,6 @@ class SettingsForm extends React.Component {
       const image = this.props.currentUser.image || '';
       Object.assign(this.state, {
         image,
-        croppedImg: image,
         username: this.props.currentUser.username,
         bio: this.props.currentUser.bio,
         email: this.props.currentUser.email
@@ -57,15 +56,16 @@ class SettingsForm extends React.Component {
       const image = nextProps.currentUser.image || '';
       this.setState(Object.assign({}, this.state, {
         image,
-        croppedImg: image,
         username: nextProps.currentUser.username,
         bio: nextProps.currentUser.bio,
         email: nextProps.currentUser.email
       }));
     }
   }
-  didUpload = () => {
-
+  didUpload = (url) => {
+    this.setState({
+      image: url
+    });
   };
   render() {
     return (

@@ -92,8 +92,9 @@ class ImageUpload extends Component {
           .set('Accept', 'application/json');
         r.then(resp => {
           console.error(94, resp);
-          this.setState({image: `${kDownloadURL}/${file.name}`});
-          this.props.didUpload(resp);
+          const url = `${kDownloadURL}/${file.name}`;
+          this.setState({image: url});
+          this.props.didUpload(url);
         });
       });
   };
