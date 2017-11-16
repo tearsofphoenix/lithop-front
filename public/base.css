@@ -110,3 +110,7 @@ nav {
 .lp-meta-bar li:first-child {
     padding-left: 0 !important;
 }
+
+.lp-main-view {
+    padding-top: 35px;
+}

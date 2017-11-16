@@ -80,7 +80,7 @@ class Home extends React.Component {
 
         <MetaBar categories={kCategories} />
 
-        <div className="container page">
+        <div>
           <MainView tab="all" />
         </div>
 
