@@ -1,13 +1,28 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router';
+import agent from '../agent';
+import { connect } from 'react-redux';
+import {
+  APPLY_TAG_FILTER
+} from '../constants/actionTypes';
 
+const mapDispatchToProps = dispatch => ({
+  loadArticlesByTag: (tag, pager, payload) =>
+    dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload })
+});
+
+@connect(() => ({}), mapDispatchToProps)
 export default
 class CategoryItem extends Component {
   static propTypes = {
-    category: PropTypes.string
+    category: PropTypes.string,
+    loadArticlesByTag: PropTypes.func
   };
-
+  componentDidMount() {
+    const {category} = this.props;
+    this.props.loadArticlesByTag(category, page => agent.Articles.byTag(category, page), agent.Articles.byTag(category));
+  }
   render() {
     const {category} = this.props;
     const url = `/tag/${category}`;
