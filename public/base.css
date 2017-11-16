@@ -76,3 +76,37 @@ nav {
 .navbar-brand {
     color: white !important;
 }
+
+.lp-meta-bar {
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.05)!important;
+}
+
+.lp-broderTopLightest {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 1000px;
+    border-top: 1px solid rgba(0,0,0,.05)!important;
+}
+
+.lp-meta-bar ul {
+    display: block;
+    padding: 0 !important;
+    margin-bottom: 0 !important;
+    text-align: left;
+    white-space: nowrap;
+    list-style: none;
+}
+
+.lp-meta-bar li {
+    display: inline-block !important;
+    padding: 10px;
+}
+
+.lp-meta-bar li a:hover {
+    text-decoration: none;
+}
+
+.lp-meta-bar li:first-child {
+    padding-left: 0 !important;
+}

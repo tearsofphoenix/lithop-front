@@ -3,6 +3,7 @@ import MainView from './MainView';
 import React from 'react';
 import Alert from 'react-s-alert';
 import Tags from './Tags';
+import MetaBar from '../MetaBar';
 import Footer from '../Footer';
 import agent from '../../agent';
 import { connect } from 'react-redux';
@@ -28,6 +29,22 @@ const mapDispatchToProps = dispatch => ({
   onUnload: () =>
     dispatch({  type: HOME_PAGE_UNLOADED })
 });
+
+const kCategories = [
+  {
+    name: '主页',
+    id: '',
+    url: ''
+  },
+  {
+    name: '生石化',
+    id: 'shengshishua'
+  },
+  {
+    name: '小列岛',
+    id: 'xliedao'
+  }
+];
 
 class Home extends React.Component {
   componentWillMount() {
@@ -60,6 +77,8 @@ class Home extends React.Component {
       <div className="home-page">
 
         <Banner token={this.props.token} appName={this.props.appName} />
+
+        <MetaBar categories={kCategories} />
 
         <div className="container page">
           <MainView tab="all" />
