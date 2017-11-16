@@ -5,20 +5,23 @@ import {Link} from 'react-router';
 export default
 class MetaBar extends Component {
   static propTypes = {
-    categories: PropTypes.array
+    tags: PropTypes.array
   };
   render() {
-    const {categories} = this.props;
+    let {tags = []} = this.props;
+    if (tags.length > 0 && tags[0] !== '主页') {
+      tags.unshift('主页');
+    }
     return (<div className="lp-meta-bar">
       <div className="lp-broderTopLightest">
         <ul>
           <div>
-          {categories.map((looper, idx) => {
-            const {url = `/category/${looper.id}`} = looper;
+          {tags.map((looper, idx) => {
+            const url = idx === 0 ? '' : `/tag/${looper}`;
             return (
               <li key={idx}>
                 <Link to={url}>
-                  <div>{looper.name}</div>
+                  <div>{looper}</div>
                 </Link>
               </li>
             );

@@ -114,3 +114,21 @@ nav {
 .lp-main-view {
     padding-top: 35px;
 }
+
+section {
+    margin: 30px auto 40px;
+    max-width: 1000px;
+}
+
+.lp-category-header {
+    border-bottom: 1px solid rgba(0,0,0,.15)!important;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.lp-header-inner {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: space-between;
+}

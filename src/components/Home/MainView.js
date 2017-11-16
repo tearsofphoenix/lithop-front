@@ -3,6 +3,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import { CHANGE_TAB } from '../../constants/actionTypes';
+import CategoryList from '../CategoryList';
 
 const YourFeedTab = props => {
   if (props.token) {
@@ -67,26 +68,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const MainView = props => {
+  const {tags} = props;
   return (
       <div className="lp-main-view">
-          <div className="feed-toggle">
-            <ul className="nav nav-pills outline-active">
-
-              <GlobalFeedTab tab={ props.tab } onTabClick={ props.onTabClick } />
-
-              <TagFilterTab tag={ props.tag } />
-
-            </ul>
-          </div>
-
-          <ArticleList
-              pager={ props.pager }
-              articles={ props.articles }
-              loading={ props.loading }
-              articlesCount={ props.articlesCount }
-              currentPage={ props.currentPage }
-              loadFunc={ () => props.loadMore(props.tab, agent.Articles.all, agent.Articles.all()) }
-          />
+          <CategoryList categories={tags} />
       </div>
   );
 };

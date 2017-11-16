@@ -30,22 +30,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch({  type: HOME_PAGE_UNLOADED })
 });
 
-const kCategories = [
-  {
-    name: '主页',
-    id: '',
-    url: ''
-  },
-  {
-    name: '生石化',
-    id: 'shengshishua'
-  },
-  {
-    name: '小列岛',
-    id: 'xliedao'
-  }
-];
-
 class Home extends React.Component {
   componentWillMount() {
     const tab = 'all';
@@ -78,7 +62,7 @@ class Home extends React.Component {
 
         <Banner token={this.props.token} appName={this.props.appName} />
 
-        <MetaBar categories={kCategories} />
+        <MetaBar tags={this.props.tags} />
 
         <div>
           <MainView tab="all" />
