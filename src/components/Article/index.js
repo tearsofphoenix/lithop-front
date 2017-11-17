@@ -57,8 +57,11 @@ class Article extends React.Component {
 
           </div>
         </div>
-
-        <div style={imageStyle} />
+        {article.image && <figure>
+          <div>
+            <img src={article.image} />
+          </div>
+        </figure>}
 
         <div className="container page">
 

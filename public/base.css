@@ -162,3 +162,14 @@ section {
 .lp-header-icon svg {
     fill: #5CB85C;
 }
+
+figure {
+    clear: both;
+    box-sizing: border-box;
+    user-select: auto;
+    z-index: 100;
+    outline: 0;
+    margin-top: 40px !important;
+    display: flex !important;
+    justify-content: center;
+}
