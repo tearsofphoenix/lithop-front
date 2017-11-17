@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import CategoryItem from './CategoryItem';
 import {
   FOLLOW_USER,
   UNFOLLOW_USER,
@@ -148,11 +149,7 @@ class Profile extends React.Component {
               {this.renderTabs()}
             </div>
 
-            <ArticleList
-                pager={this.props.pager}
-                articles={this.props.articles}
-                articlesCount={this.props.articlesCount}
-                state={this.props.currentPage} />
+            <CategoryItem data={this.props.articles} />
 
           </div>
         </div>

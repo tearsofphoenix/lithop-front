@@ -16,19 +16,32 @@ const mapDispatchToProps = dispatch => ({
 
 class CategoryItem extends Component {
   static propTypes = {
+    data: PropTypes.array,
     category: PropTypes.string,
     loadArticlesByTag: PropTypes.func,
     articleList: PropTypes.object,
     hideMore: PropTypes.bool
   };
+  constructor(props, context) {
+    super(props, context);
+    this.state = {data: props.data};
+  }
   componentDidMount() {
-    const {category} = this.props;
-    this._reloadData(category);
+    if (!this.state.data) {
+      const { category } = this.props;
+      this._reloadData(category);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.category !== nextProps.category) {
-      this._reloadData(nextProps.category);
+    if (nextProps.data) {
+      this.setState({data: nextProps.data});
+    } else {
+      if (!this.state.data) {
+        if (this.props.category !== nextProps.category) {
+          this._reloadData(nextProps.category);
+        }
+      }
     }
   }
 
@@ -40,12 +53,15 @@ class CategoryItem extends Component {
     const {category, hideMore = false, articleList = {}} = this.props;
     const {articlesPool = {}} = articleList;
     const url = `/tag/${category}`;
-    const info = articlesPool[category] || {};
-    const {articles = []} = info;
-    console.log(33, Object.keys(articlesPool), articlesPool['小列岛'], this.props, this.props.category, articles);
+    let {data} = this.state;
+    if (!data) {
+      const info = articlesPool[category] || {};
+      const { articles = [] } = info;
+      data = articles;
+    }
     return (<div>
       <section className="lp-clearfix">
-        <header className="lp-category-header">
+        {category && <header className="lp-category-header">
           <div className="lp-header-inner">
             <span className="lp-header-title">
               {hideMore ? category : <Link to={url}>{category}</Link>}
@@ -54,16 +70,16 @@ class CategoryItem extends Component {
               <span className="">更多</span>
               <span className="lp-header-icon">
                 <svg className="svgIcon-use" width="19" height="19" viewBox="0 0 19 19">
-                  <path d="M7.6 5.138L12.03 9.5 7.6 13.862l-.554-.554L10.854 9.5 7.046 5.692" fillRule="evenodd"></path>
+                  <path d="M7.6 5.138L12.03 9.5 7.6 13.862l-.554-.554L10.854 9.5 7.046 5.692" fillRule="evenodd"/>
                 </svg>
               </span>
             </Link>
             }
           </div>
         </header>
-
+        }
         {
-          articles.map((looper, idx) => {
+          data.map((looper, idx) => {
             return (<ArticlePreview key={idx} article={looper} />)
           })
         }
