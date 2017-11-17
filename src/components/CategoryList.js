@@ -21,9 +21,14 @@ class CategoryList extends Component {
     if (categories.length === 0) {
       child = (<div />);
     } else {
-      child = categories.map((looper, idx) => <div key={idx}>
-        <CategoryItem category={ looper } />
-      </div>);
+      child = [];
+      categories.forEach((looper, idx) => {
+        if (looper !== '主页') {
+          child.push(<div key={idx}>
+            <CategoryItem category={looper}/>
+          </div>);
+        }
+      });
     }
     return (
       <div>

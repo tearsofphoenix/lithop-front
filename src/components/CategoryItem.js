@@ -26,15 +26,15 @@ class CategoryItem extends Component {
     this.props.loadArticlesByTag(category, page => agent.Articles.byTag(category, page), agent.Articles.byTag(category));
   }
   render() {
-    const {category} = this.props;
+    const {category, articlesPool = {}} = this.props;
     const url = `/tag/${category}`;
-    const info = this.props.articlesPool[category] || {};
+    const info = articlesPool[category] || {};
     const {articles = []} = info;
     return (<div>
-      <section>
+      <section className="lp-clearfix">
         <header className="lp-category-header">
           <div className="lp-header-inner">
-            <span className="">
+            <span className="lp-header-title">
               <Link to={url}>{category}</Link>
             </span>
             <Link to={url}>

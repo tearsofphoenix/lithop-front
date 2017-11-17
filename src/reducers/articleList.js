@@ -17,6 +17,7 @@ const initState = {
 };
 
 export default (state = initState, action) => {
+  const {articlesPool = {}} = state;
   switch (action.type) {
     case ARTICLE_FAVORITED:
     case ARTICLE_UNFAVORITED:
@@ -41,7 +42,6 @@ export default (state = initState, action) => {
         currentPage: action.page
       };
     case APPLY_TAG_FILTER:
-      const {articlesPool = {}} = state;
       const {articles, articlesCount} = action.payload;
       articlesPool[action.tag] = {
         articles,
@@ -57,16 +57,23 @@ export default (state = initState, action) => {
         currentPage: 0,
         articlesPool
       };
-    case HOME_PAGE_LOADED:
+    case HOME_PAGE_LOADED: {
+      const { articles, articlesCount } = action.payload[1];
+      articlesPool[ action.tag ] = {
+        articles,
+        articlesCount
+      };
       return {
         ...state,
         pager: action.pager,
-        tags: action.payload[0].tags,
-        articles: action.payload[1].articles,
-        articlesCount: action.payload[1].articlesCount,
+        tags: action.payload[ 0 ].tags,
+        articles,
+        articlesCount,
         currentPage: 0,
-        tab: action.tab
+        tab: action.tab,
+        articlesPool
       };
+    }
     case HOME_PAGE_UNLOADED:
       return {};
     case CHANGE_TAB:

@@ -132,3 +132,19 @@ section {
     flex: 1 1 auto;
     justify-content: space-between;
 }
+
+.lp-header-title {
+    font-size: 22px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.54)!important;
+}
+
+.lp-clearfix {
+    clear: both;
+}
+
+.lp-clearfix:before, .lp-clearfix:after {
+    display: table;
+    content: " ";
+    clear: both;
+}

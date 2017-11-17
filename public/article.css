@@ -40,7 +40,9 @@
 }
 
 .article-preview {
-    display: flex;
+    display: block;
+    float: left;
+    width: 50%;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 10px;
