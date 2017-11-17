@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { SEARCH_ARTICLE } from '../constants/actionTypes'
+import agent from '../agent';
 
 const mapDispatchToProps = dispatch => ({
   searchArticle: (value, payload) => dispatch({ type: SEARCH_ARTICLE, payload })
@@ -46,7 +47,8 @@ class LoggedInView extends React.Component {
 
   searchArticle = (event) => {
     const {value} = event.target;
-    this.props.searchArticle(value);
+    // this.props.searchArticle(value);
+    agent.Articles.search(value);
   };
 
   render() {
