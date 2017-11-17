@@ -12,8 +12,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: APPLY_TAG_FILTER, tag, pager, payload })
 });
 
-@connect(() => ({}), mapDispatchToProps)
-export default
 class CategoryItem extends Component {
   static propTypes = {
     category: PropTypes.string,
@@ -47,3 +45,5 @@ class CategoryItem extends Component {
     </div>);
   }
 }
+
+export default connect(() => ({}), mapDispatchToProps)(CategoryItem);
