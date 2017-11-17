@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
+import ArticlePreview from './ArticlePreview';
+
 import {
   APPLY_TAG_FILTER
 } from '../constants/actionTypes';
@@ -15,15 +17,19 @@ const mapDispatchToProps = dispatch => ({
 class CategoryItem extends Component {
   static propTypes = {
     category: PropTypes.string,
-    loadArticlesByTag: PropTypes.func
+    loadArticlesByTag: PropTypes.func,
+    articlesPool: PropTypes.object
   };
   componentDidMount() {
+    console.log(21, 'did load');
     const {category} = this.props;
     this.props.loadArticlesByTag(category, page => agent.Articles.byTag(category, page), agent.Articles.byTag(category));
   }
   render() {
     const {category} = this.props;
     const url = `/tag/${category}`;
+    const info = this.props.articlesPool[category] || {};
+    const {articles = []} = info;
     return (<div>
       <section>
         <header className="lp-category-header">
@@ -41,9 +47,17 @@ class CategoryItem extends Component {
             </Link>
           </div>
         </header>
+
+        {
+          articles.map((looper, idx) => {
+            return (<ArticlePreview key={idx} article={looper} />)
+          })
+        }
       </section>
     </div>);
   }
 }
 
-export default connect(() => ({}), mapDispatchToProps)(CategoryItem);
+export default connect((state) => ({
+  articlesPool: state.articleList.articlesPool
+}), mapDispatchToProps)(CategoryItem);

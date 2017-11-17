@@ -12,7 +12,11 @@ import {
   PROFILE_FAVORITES_PAGE_UNLOADED
 } from '../constants/actionTypes';
 
-export default (state = {}, action) => {
+const initState = {
+  articlesPool: {}
+};
+
+export default (state = initState, action) => {
   switch (action.type) {
     case ARTICLE_FAVORITED:
     case ARTICLE_UNFAVORITED:
@@ -37,6 +41,12 @@ export default (state = {}, action) => {
         currentPage: action.page
       };
     case APPLY_TAG_FILTER:
+      const {articlesPool = {}} = state;
+      const {articles, articlesCount} = action.payload;
+      articlesPool[action.tag] = {
+        articles,
+        articlesCount
+      };
       return {
         ...state,
         pager: action.pager,
@@ -44,7 +54,8 @@ export default (state = {}, action) => {
         articlesCount: action.payload.articlesCount,
         tab: null,
         tag: action.tag,
-        currentPage: 0
+        currentPage: 0,
+        articlesPool
       };
     case HOME_PAGE_LOADED:
       return {
