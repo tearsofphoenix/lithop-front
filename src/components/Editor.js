@@ -65,7 +65,9 @@ class Editor extends React.Component {
         tagList: this.props.tagList
       };
 
-      article.image = this.state.image;
+      if (this.state.image) {
+        article.image = this.state.image;
+      }
       const slug = { slug: this.props.articleSlug };
       console.log(73, article);
       const promise = this.props.articleSlug ?

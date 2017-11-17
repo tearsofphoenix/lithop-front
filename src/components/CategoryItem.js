@@ -18,7 +18,7 @@ class CategoryItem extends Component {
   static propTypes = {
     category: PropTypes.string,
     loadArticlesByTag: PropTypes.func,
-    articlesPool: PropTypes.object
+    articleList: PropTypes.object
   };
   componentDidMount() {
     console.log(21, 'did load');
@@ -26,10 +26,12 @@ class CategoryItem extends Component {
     this.props.loadArticlesByTag(category, page => agent.Articles.byTag(category, page), agent.Articles.byTag(category));
   }
   render() {
-    const {category, articlesPool = {}} = this.props;
+    const {category, articleList = {}} = this.props;
+    const {articlesPool = {}} = articleList;
     const url = `/tag/${category}`;
     const info = articlesPool[category] || {};
     const {articles = []} = info;
+    console.log(33, Object.keys(articlesPool), articlesPool['小列岛'], this.props, this.props.category, articles);
     return (<div>
       <section className="lp-clearfix">
         <header className="lp-category-header">
@@ -59,5 +61,5 @@ class CategoryItem extends Component {
 }
 
 export default connect((state) => ({
-  articlesPool: state.articleList.articlesPool
+  articleList: state.articleList
 }), mapDispatchToProps)(CategoryItem);
