@@ -73,7 +73,7 @@ class SettingsForm extends React.Component {
         <fieldset>
 
           <fieldset className="form-group">
-            <ImageUpload didUpload={this.didUpload} token={this.props.uptoken} />
+            <ImageUpload didUpload={this.didUpload} />
           </fieldset>
 
           <fieldset className="form-group">
@@ -154,7 +154,7 @@ class Settings extends React.Component {
               <SettingsForm
                 currentUser={this.props.currentUser}
                 onSubmitForm={this.props.onSubmitForm}
-                uptoken={this.props.uptoken} />
+              />
 
               <hr />
 

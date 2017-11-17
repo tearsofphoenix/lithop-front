@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
-import AvatarCropper from "react-avatar-cropper";
-import FileUpload from './FileUpload';
-import FileUploader from './FileUploader';
+import ImageUpload from './ImageUpload';
 import {
   ADD_TAG,
   EDITOR_PAGE_LOADED,
@@ -39,9 +37,6 @@ class Editor extends React.Component {
     super();
 
     this.state = {
-      cropperOpen: false,
-      croppedImg: "http://www.fillmurray.com/400/400",
-      image: null,
     };
     const updateFieldEvent =
       key => ev => this.props.onUpdateField(key, ev.target.value);
@@ -70,7 +65,7 @@ class Editor extends React.Component {
         tagList: this.props.tagList
       };
 
-      article.image = this.state.croppedImg;
+      article.image = this.state.image;
       const slug = { slug: this.props.articleSlug };
       console.log(73, article);
       const promise = this.props.articleSlug ?
@@ -81,25 +76,9 @@ class Editor extends React.Component {
     };
   }
 
-  handleFileChange = (dataURI) => {
+  didUpload = (url) => {
     this.setState({
-      image: dataURI,
-      croppedImg: this.state.croppedImg,
-      cropperOpen: true
-    });
-  }
-
-  handleCrop = (dataURI) => {
-    this.setState({
-      cropperOpen: false,
-      image: null,
-      croppedImg: dataURI
-    });
-  };
-  handleRequestHide = (event) => {
-    console.log(event);
-    this.setState({
-      cropperOpen: false
+      image: url
     });
   };
 
@@ -145,8 +124,8 @@ class Editor extends React.Component {
                       onChange={this.changeTitle} />
                   </fieldset>
 
-                  <fieldset className="form-group" style={{paddingLeft: '20px'}}>
-                    <FileUploader uptoken={this.props.uptoken} />
+                  <fieldset className="form-group">
+                    <ImageUpload didUpload={this.didUpload} />
                   </fieldset>
 
                   <fieldset className="form-group">

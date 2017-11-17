@@ -29,7 +29,6 @@ function formatMaxSize(size){
 export default
 class ImageUpload extends Component {
   static propTypes = {
-    token: PropTypes.string,
     didUpload: PropTypes.func
   };
   constructor(props, context) {
@@ -91,7 +90,6 @@ class ImageUpload extends Component {
           .attach('file', file, file.name)
           .set('Accept', 'application/json');
         r.then(resp => {
-          console.error(94, resp);
           const url = `${kDownloadURL}/${file.name}`;
           this.setState({image: url});
           this.props.didUpload(url);
