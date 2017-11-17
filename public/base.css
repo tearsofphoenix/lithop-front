@@ -100,7 +100,7 @@ nav {
 
 .lp-meta-bar li {
     display: inline-block !important;
-    padding: 10px;
+    padding: 10px 14px 10px 14px;
 }
 
 .lp-meta-bar li a:hover {
@@ -147,4 +147,18 @@ section {
     display: table;
     content: " ";
     clear: both;
+}
+
+.lp-flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.lp-header-icon {
+    height: 20px;
+    line-height: 20px;
+}
+
+.lp-header-icon svg {
+    fill: #5CB85C;
 }

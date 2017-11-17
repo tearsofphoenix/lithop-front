@@ -18,15 +18,26 @@ class CategoryItem extends Component {
   static propTypes = {
     category: PropTypes.string,
     loadArticlesByTag: PropTypes.func,
-    articleList: PropTypes.object
+    articleList: PropTypes.object,
+    hideMore: PropTypes.bool
   };
   componentDidMount() {
-    console.log(21, 'did load');
     const {category} = this.props;
-    this.props.loadArticlesByTag(category, page => agent.Articles.byTag(category, page), agent.Articles.byTag(category));
+    this._reloadData(category);
   }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.category !== nextProps.category) {
+      this._reloadData(nextProps.category);
+    }
+  }
+
+  _reloadData = (category) => {
+    this.props.loadArticlesByTag(category, page => agent.Articles.byTag(category, page), agent.Articles.byTag(category));
+  };
+
   render() {
-    const {category, articleList = {}} = this.props;
+    const {category, hideMore = false, articleList = {}} = this.props;
     const {articlesPool = {}} = articleList;
     const url = `/tag/${category}`;
     const info = articlesPool[category] || {};
@@ -37,16 +48,17 @@ class CategoryItem extends Component {
         <header className="lp-category-header">
           <div className="lp-header-inner">
             <span className="lp-header-title">
-              <Link to={url}>{category}</Link>
+              {hideMore ? category : <Link to={url}>{category}</Link>}
             </span>
-            <Link to={url}>
+            {!hideMore && <Link to={url} className="lp-flex-center">
               <span className="">更多</span>
-              <span className="">
+              <span className="lp-header-icon">
                 <svg className="svgIcon-use" width="19" height="19" viewBox="0 0 19 19">
                   <path d="M7.6 5.138L12.03 9.5 7.6 13.862l-.554-.554L10.854 9.5 7.046 5.692" fillRule="evenodd"></path>
                 </svg>
               </span>
             </Link>
+            }
           </div>
         </header>
 

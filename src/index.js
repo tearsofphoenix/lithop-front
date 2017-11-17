@@ -13,6 +13,7 @@ import Profile from './components/Profile';
 import ProfileFavorites from './components/ProfileFavorites';
 import Register from './components/Register';
 import Settings from './components/Settings';
+import TagView from './components/TagView';
 
 ReactDOM.render((
   <Provider store={store}>
@@ -21,6 +22,7 @@ ReactDOM.render((
         <IndexRoute component={Home} />
         <Route path="login" component={Login} />
         <Route path="register" component={Register} />
+        <Route path="tag/:tag" component={TagView} />
         <Route path="editor" component={Editor} />
         <Route path="editor/:slug" component={Editor} />
         <Route path="article/:id" component={Article} />
