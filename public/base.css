@@ -2,6 +2,10 @@
     flex: 1 1 auto !important;
 }
 
+.lp-flex0 {
+    flex: 0 0 auto !important;
+}
+
 .lp-flex {
     display: flex;
 }
@@ -172,4 +176,70 @@ figure {
     margin-top: 40px !important;
     display: flex !important;
     justify-content: center;
+}
+
+.linePlaceholder {
+    background: rgba(0,0,0,.05);
+    display: inline-block;
+    height: 10px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    width: 100%;
+    float: left;
+    clear: both;
+}
+
+.linePlaceholder--truncated {
+    width: 80%;
+}
+
+.linePlaceholder--medium {
+    width: 240px;
+}
+
+.linePlaceholder--small {
+    width: 120px;
+}
+
+.lp-size4of12 {
+    width: 33.3333333%;
+}
+
+.lp-loader {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lp-loader-item {
+    padding-right: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.lp-loader-item:last-child {
+    padding-right: 0;
+}
+
+.avatarPlaceholder {
+    background: rgba(0,0,0,.05);
+    border-radius: 100%;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.lp-size36x36 {
+    width: 36px;
+    height: 36px;
+}
+
+.lp-marginTop10 {
+    margin-top: 10px;
+}
+
+.lp-loader-down {
+    display: flex;
+    flex-direction: row;
 }
