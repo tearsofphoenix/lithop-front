@@ -3,11 +3,26 @@ import {
   ARTICLE_PAGE_UNLOADED,
   ADD_COMMENT,
   DELETE_COMMENT,
-  SEARCH_ARTICLE
+  SEARCH_ARTICLE,
+  CLEAR_SEARCH_ARTICLE
 } from '../constants/actionTypes';
 
 export default (state = {}, action) => {
   switch (action.type) {
+    case SEARCH_ARTICLE: {
+      const {articles = []} = action.payload[0];
+      console.log(12, action.payload);
+      return {
+        ...state,
+        searchResults: articles
+      };
+    }
+    case CLEAR_SEARCH_ARTICLE: {
+      return {
+        ...state,
+        searchResults: null
+      };
+    }
     case ARTICLE_PAGE_LOADED:
       return {
         ...state,

@@ -12,13 +12,15 @@ import {
   HOME_PAGE_UNLOADED,
   APPLY_TAG_FILTER
 } from '../../constants/actionTypes';
+import CategoryItem from '../CategoryItem';
 
 const Promise = global.Promise;
 
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
-  token: state.common.token
+  token: state.common.token,
+  searchResults: state.article.searchResults
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -42,21 +44,8 @@ class Home extends React.Component {
     this.props.onUnload();
   }
 
-  renderTags = () => {
-    return (<div className="col-md-2">
-      <div className="sidebar">
-
-        <p>热门标签</p>
-
-        <Tags
-            tags={this.props.tags}
-            onClickTag={this.props.onClickTag} />
-
-      </div>
-    </div>);
-  };
-
   render() {
+    const {searchResults} = this.props;
     return (
       <div className="home-page">
 
@@ -65,7 +54,8 @@ class Home extends React.Component {
         <MetaBar tags={this.props.tags} />
 
         <div>
-          <MainView tab="all" />
+          {!searchResults && <MainView tab="all" />}
+          {searchResults && <div className="lp-main-view"><CategoryItem data={searchResults} /></div>}
         </div>
 
         <Footer />

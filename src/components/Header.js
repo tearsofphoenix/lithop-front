@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { SEARCH_ARTICLE } from '../constants/actionTypes'
+import { SEARCH_ARTICLE, CLEAR_SEARCH_ARTICLE } from '../constants/actionTypes'
 import agent from '../agent';
 
 const mapDispatchToProps = dispatch => ({
-  searchArticle: (value, payload) => dispatch({ type: SEARCH_ARTICLE, payload })
+  searchArticle: (result) => dispatch({ type: SEARCH_ARTICLE, payload: result }),
+  clearSearchResult: () => dispatch({type: CLEAR_SEARCH_ARTICLE})
 });
 
 const LoggedOutView = props => {
@@ -46,9 +46,13 @@ class LoggedInView extends React.Component {
   };
 
   searchArticle = (event) => {
-    const {value} = event.target;
-    // this.props.searchArticle(value);
-    agent.Articles.search(value);
+    let {value} = event.target;
+    value = value.trim();
+    if (value.length > 0) {
+      this.props.searchArticle(Promise.all([ agent.Articles.search(value) ]));
+    } else {
+      this.props.clearSearchResult();
+    }
   };
 
   render() {
@@ -95,10 +99,9 @@ class LoggedInView extends React.Component {
   }
 }
 
+LoggedInView = connect(() => ({}), mapDispatchToProps)(LoggedInView);
+
 class Header extends React.Component {
-  static propTypes = {
-    searchArticle: PropTypes.func
-  };
 
   render() {
     return (
@@ -111,11 +114,11 @@ class Header extends React.Component {
 
             <LoggedOutView currentUser={ this.props.currentUser } />
 
-            <LoggedInView currentUser={ this.props.currentUser } searchArticle={this.props.searchArticle} />
+            <LoggedInView currentUser={ this.props.currentUser } />
           </div>
         </nav>
     );
   }
 }
 
-export default connect(() => ({}), mapDispatchToProps)(Header);
+export default Header;

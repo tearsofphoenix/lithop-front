@@ -66,7 +66,7 @@ const Articles = {
     requests.put(`/articles/${article.slug}`, { article: omitSlug(article) }),
   create: article =>
     requests.post('/articles', { article }),
-  search: q => requests.get('/search', {q})
+  search: q => requests.get(`/search?q=${q}`)
 };
 
 const Comments = {
