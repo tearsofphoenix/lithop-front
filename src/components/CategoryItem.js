@@ -4,11 +4,9 @@ import {Link} from 'react-router';
 import agent from '../agent';
 import { connect } from 'react-redux';
 import ArticlePreview from './ArticlePreview';
-import InfiniteScroll from 'react-infinite-scroller';
 import {
   APPLY_TAG_FILTER
 } from '../constants/actionTypes';
-import Loader from './Loader';
 
 const mapDispatchToProps = dispatch => ({
   loadArticlesByTag: (tag, pager, payload) =>
@@ -80,15 +78,12 @@ class CategoryItem extends Component {
           </div>
         </header>
         }
-        <InfiniteScroll pageStart={0} loadMore={this._loadMoreFunc} hasMore loader={<div />}>
         {
           data.map((looper, idx) => {
             return (<ArticlePreview key={idx} article={looper} />)
           })
         }
-        </InfiniteScroll>
       </section>
-      <Loader />
     </div>);
   }
 }

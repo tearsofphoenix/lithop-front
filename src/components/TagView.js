@@ -19,7 +19,6 @@ class TagView extends React.Component {
     if (this.props.params.tag !== nextProps.params.tag) {
       this.setState({tag: nextProps.params.tag});
     }
-    console.log(212222222, nextProps);
   }
 
   componentWillMount() {
