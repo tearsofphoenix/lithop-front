@@ -7,6 +7,7 @@ import MetaBar from '../MetaBar';
 import Footer from '../Footer';
 import agent from '../../agent';
 import { connect } from 'react-redux';
+import SearchView from '../SearchView';
 import {
   HOME_PAGE_LOADED,
   HOME_PAGE_UNLOADED,
@@ -55,7 +56,7 @@ class Home extends React.Component {
 
         <div>
           {!searchResults && <MainView tab="all" />}
-          {searchResults && <div className="lp-main-view"><CategoryItem data={searchResults} /></div>}
+          {searchResults && <div className="lp-main-view"><SearchView data={searchResults} /></div>}
         </div>
 
         <Footer />
